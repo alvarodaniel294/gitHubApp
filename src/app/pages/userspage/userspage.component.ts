@@ -10,11 +10,13 @@ import { Router } from '@angular/router';
 export class UserspageComponent implements OnInit {
 
   users;
-
+  loading:boolean;
   constructor(private githubService:GithubapiService,
               private router:Router) { 
+    this.loading=true;
     this.githubService.getUsers().subscribe(gitUsers=>{
       this.users=gitUsers;
+      this.loading=false;
     });
   }
 

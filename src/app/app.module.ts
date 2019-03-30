@@ -11,6 +11,7 @@ import { HttpClientModule } from "@angular/common/http";
 //routes
 import { FeatureRoutingModule } from "./app.routes";
 import { NoimagePipe } from './pipes/noimage.pipe';
+import { LoadingComponent } from './shared/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NoimagePipe } from './pipes/noimage.pipe';
     NavbarComponent,
     UserspageComponent,
     RepospageComponent,
-    NoimagePipe
+    NoimagePipe,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

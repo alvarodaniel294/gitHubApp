@@ -11,8 +11,10 @@ export class RepospageComponent implements OnInit {
 
   userName:string;
   reposUser;
+  loading:boolean;
   constructor(private githubApiService:GithubapiService,
               private activatedRoute:ActivatedRoute) {
+                this.loading=true;
                 this.activatedRoute.params.subscribe(params=>{
                   this.userName=params["userName"]
                 });
@@ -21,6 +23,7 @@ export class RepospageComponent implements OnInit {
   ngOnInit() {
     this.githubApiService.getReposUser(this.userName).subscribe(reposUser=>{
       this.reposUser=reposUser;
+      this.loading=false;
     })
   }
   goGithubRepo(url:string){
