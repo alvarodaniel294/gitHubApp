@@ -1,3 +1,25 @@
-<p>
-  userspage works!
-</p>
+
+<div class="row">
+  <div class="col">
+    <div class="card-columns">
+      <div class="card " *ngFor="let user of users">
+          <div class="card-header">
+              <h4>{{user.login}}</h4>
+            </div>
+          <img [src]="user.avatar_url | noimage"
+              class="card-img-top" >
+          
+          <div class="card-footer">
+              <ul class="list-group list-group-flush">
+                  <button class="btn btn-dark m-1" (click)="userPageExt(user.html_url)">
+                      Ver {{user.login}}
+                    </button>
+                  <button class="btn btn-dark m-1" (click)="repoPage(user.login)">
+                       Repositorios
+                    </button>
+            </ul>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

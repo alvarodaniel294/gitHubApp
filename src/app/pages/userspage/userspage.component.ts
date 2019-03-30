@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GithubapiService } from 'src/app/services/githubapi.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-userspage',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserspageComponent implements OnInit {
 
-  constructor() { }
+  users;
+
+  constructor(private githubService:GithubapiService,
+              private router:Router) { 
+    this.githubService.getUsers().subscribe(gitUsers=>{
+      this.users=gitUsers;
+    });
+  }
 
   ngOnInit() {
+    
+  }
+  userPageExt(html:string){
+    window.open(html);
+  }
+  repoPage(userName:string){
+    this.router.navigate(['repos',userName])
   }
 
 }
