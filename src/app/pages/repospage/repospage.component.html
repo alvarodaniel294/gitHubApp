@@ -8,8 +8,11 @@
                   <h4>{{repo.name}}</h4>
               </div>
               <div class="card-body">
-                <div class="card-text">
+                <div class="card-text" *ngIf="repo.description!==null">
                   {{repo.description}}
+                </div>
+                <div class="card-text" *ngIf="repo.description===null">
+                  No existe descripcion.
                 </div>
               </div>
               <div class="card-footer">
@@ -38,10 +41,10 @@
 
 <nav aria-label="Page navigation example m-2" *ngIf="!loading">
   <ul class="pagination justify-content-center">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    <li class="page-item" *ngIf="githubApiService.current>1" ><a class="page-link" tabindex="-1" (click)="goPagePrev()">Previous</a></li>
+    <li class="page-item"><a class="page-link" tabindex="-1" (click)="goPageFirst()">{{githubApiService.primero}}</a></li>
+    <li class="page-item" *ngIf="reposUser.length>0"><a class="page-link" tabindex="-1"(click)="goPageSecond()">{{githubApiService.segundo}}</a></li>
+    <li class="page-item" *ngIf="reposUser.length>0"><a class="page-link" tabindex="-1"(click)="goPageThird()">{{githubApiService.tercero}}</a></li>
+    <li class="page-item" *ngIf="reposUser.length>0"><a class="page-link"tabindex="-1" (click)="goPageNext()">Next</a></li>
   </ul>
 </nav>
