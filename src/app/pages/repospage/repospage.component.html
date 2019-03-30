@@ -1,3 +1,30 @@
-<p>
-  repospage works!
-</p>
+<div class="row">
+  <div class="col">
+      <div class="card-columns">
+          <div class="card " *ngFor="let repo of reposUser">
+              <div class="card-header">
+                  <h4>{{repo.name}}</h4>
+              </div>
+              <div class="card-footer">
+                  <ul class="list-group list-group-flush">
+                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Issues
+                            <span class="badge badge-primary badge-pill">{{repo.open_issues}}</span>
+                          </li>
+                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Issues Abiertos
+                            <span class="badge badge-primary badge-pill">{{repo.open_issues_count}}</span>
+                          </li>
+                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Forks
+                            <span class="badge badge-primary badge-pill">{{repo.forks_count}}</span>
+                          </li>
+                          <button class="btn btn-dark m-1" (click)="goGithubRepo(repo.html_url)">
+                              Ver Repo
+                          </button>
+                  </ul>          
+              </div>
+        </div>
+    </div>
+  </div>
+</div>

@@ -14,4 +14,8 @@ export class GithubapiService {
   getUsers(){
     return this.http.get(`${this.apiURL}/users`);
   }
+
+  getReposUser(userName:string){
+    return this.http.get(`${this.apiURL}/users/${userName}/repos`);
+  }
 }
