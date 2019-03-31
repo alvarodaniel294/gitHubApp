@@ -2,13 +2,30 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { UserspageComponent } from './pages/userspage/userspage.component';
+import { RepospageComponent } from './pages/repospage/repospage.component';
+//http
+import { HttpClientModule } from "@angular/common/http";
+
+//routes
+import { FeatureRoutingModule } from "./app.routes";
+import { NoimagePipe } from './pipes/noimage.pipe';
+import { LoadingComponent } from './shared/loading/loading.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    UserspageComponent,
+    RepospageComponent,
+    NoimagePipe,
+    LoadingComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
+    FeatureRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
