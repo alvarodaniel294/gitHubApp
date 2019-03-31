@@ -22,15 +22,18 @@ export class GithubapiService {
   getUsers(){
     return this.http.get(`${this.apiURL}/users`);
   }
+  getUsersNext(lastUser:number){
+    return this.http.get(`${this.apiURL}/users?since=${lastUser}`)
+  }
 
-  getReposUser(userName:string){
-    this.previous=0;
-    this.current=1;
-    this.next=2;
-    this.primero=1;
-    this.segundo=2;
-    this.tercero=3;
-    return this.http.get(`${this.apiURL}/users/${userName}/repos?page=1&per_page=${this.perPage}`);
+  getReposUser(userName:string,page:number){
+    this.previous=page-1;
+    this.current=page;
+    this.next=page+1;
+    this.primero=page;
+    this.segundo=page+1;
+    this.tercero=page+2;
+    return this.http.get(`${this.apiURL}/users/${userName}/repos?page=${page}&per_page=${this.perPage}`);
   }
   getReposUserNext(userName:string,page:number){
       this.previous=page;

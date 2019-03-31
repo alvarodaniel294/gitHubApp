@@ -7,7 +7,7 @@ import { RepospageComponent } from './pages/repospage/repospage.component';
 const routes: Routes = [
     { path: '', component: UserspageComponent },
     { path: 'users', component: UserspageComponent },
-    { path: 'repos/:userName', component: RepospageComponent },
+    { path: 'repos/:userName/:page', component: RepospageComponent },
     { path: '**', component: UserspageComponent },
 
 ];

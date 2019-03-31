@@ -11,12 +11,15 @@ export class UserspageComponent implements OnInit {
 
   users;
   loading:boolean;
+  lastUserId:number;
   constructor(private githubService:GithubapiService,
               private router:Router) { 
     this.loading=true;
     this.githubService.getUsers().subscribe(gitUsers=>{
       this.users=gitUsers;
       this.loading=false;
+      this.lastUserId=this.users[this.users.length-1].id;    
+      
     });
   }
 
@@ -27,7 +30,25 @@ export class UserspageComponent implements OnInit {
     window.open(html);
   }
   repoPage(userName:string){
-    this.router.navigate(['repos',userName])
+    this.router.navigate(['repos',userName,1])
+  }
+  goNext(){
+    this.loading=true;
+    this.githubService.getUsersNext(this.lastUserId).subscribe(gitUsers=>{
+      this.users=gitUsers;
+      this.loading=false;
+      this.lastUserId=this.users[this.users.length-1].id;    
+      
+    })
+  }
+  goFirst(){
+    this.loading=true;
+    this.githubService.getUsersNext(this.lastUserId).subscribe(gitUsers=>{
+      this.users=gitUsers;
+      this.loading=false;
+      this.lastUserId=0;   
+      
+    })
   }
 
 }

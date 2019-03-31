@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GithubapiService } from 'src/app/services/githubapi.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 
 @Component({
   selector: 'app-repospage',
@@ -14,15 +14,17 @@ export class RepospageComponent implements OnInit {
   loading:boolean;
   currentPage;
   constructor(public githubApiService:GithubapiService,
-              private activatedRoute:ActivatedRoute) {
+              private activatedRoute:ActivatedRoute,
+              private router:Router) {
                 this.loading=true;
                 this.activatedRoute.params.subscribe(params=>{
                   this.userName=params["userName"]
+                  this.currentPage=Number( params["page"]);
                 });
    }
 
   ngOnInit() {
-    this.githubApiService.getReposUser(this.userName).subscribe(reposUser=>{
+    this.githubApiService.getReposUser(this.userName,this.currentPage).subscribe(reposUser=>{
       this.reposUser=reposUser;
       this.loading=false;
       
@@ -34,12 +36,14 @@ export class RepospageComponent implements OnInit {
 
   goPageNext(){
     
+    this.router.navigate(["repos",this.userName,this.currentPage+1])
     this.githubApiService.getReposUserNext(this.userName,this.githubApiService.current).subscribe(reposUser=>{
       this.reposUser=reposUser
       
     })
   }
   goPagePrev(){
+    this.router.navigate(["repos",this.userName,this.currentPage-1])
     this.githubApiService.getReposUserPrev(this.userName,this.githubApiService.current).subscribe(reposUser=>{
       this.reposUser=reposUser
       
@@ -52,6 +56,8 @@ export class RepospageComponent implements OnInit {
     this.goPageNext();
   }
   goPageThird(){
+
+    this.router.navigate(["repos",this.userName,this.currentPage+2])
     this.githubApiService.getReposUserThird(this.userName,this.githubApiService.current).subscribe(reposUser=>{
       this.reposUser=reposUser
       
